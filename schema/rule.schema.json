@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://phibrowser.github.io/phi-reader-rules/schema/rule.schema.json",
+  "title": "Phi Reader View site rule file",
+  "description": "One file per site. The filename must be <site>.json.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["site", "rules"],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "site": {
+      "type": "string",
+      "description": "Registrable domain, used only to match the filename.",
+      "minLength": 1,
+      "pattern": "^[a-z0-9.-]+$"
+    },
+    "rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/definitions/rule" }
+    }
+  },
+  "definitions": {
+    "rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["host", "content"],
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "Exact host (news.example.com), suffix wildcard (*.example.com, which also matches the bare host), or contains wildcard (*example*). Exact beats suffix beats contains.",
+          "minLength": 1,
+          "pattern": "^(\\*\\.[a-z0-9.-]+|\\*[a-z0-9.-]+\\*|[a-z0-9.-]+)$"
+        },
+        "pathPrefix": {
+          "type": "string",
+          "description": "Restricts the rule to a path subtree. Matched on a / boundary, so /blog does not match /blogroll. A longer prefix wins over a shorter one.",
+          "minLength": 1,
+          "pattern": "^/"
+        },
+        "content": {
+          "type": "array",
+          "description": "Selectors for the article body. Every match of every selector is concatenated in document order, which is what makes articles split across sibling containers come out whole.",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "strip": {
+          "type": "array",
+          "description": "Selectors removed from the extracted content.",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "expand": {
+          "type": "array",
+          "description": "Selectors clicked before extraction, for read-more and show-comments style controls that hide part of the article.",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "title": {
+          "type": "string",
+          "description": "Selector for the article title. Falls back to document.title.",
+          "minLength": 1
+        },
+        "byline": {
+          "type": "string",
+          "description": "Selector for the author line.",
+          "minLength": 1
+        },
+        "forceRung": {
+          "type": "string",
+          "description": "Restricts extraction to a single rung. Use only when the other rungs produce a worse result than no result.",
+          "enum": ["rule", "readability", "structural"]
+        },
+        "notes": {
+          "type": "string",
+          "description": "Why this rule exists. Free text, ignored by the browser."
+        }
+      }
+    }
+  }
+}

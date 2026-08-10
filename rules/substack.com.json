@@ -1,0 +1,14 @@
+{
+  "$schema": "../schema/rule.schema.json",
+  "site": "substack.com",
+  "rules": [
+    {
+      "host": "*.substack.com",
+      "pathPrefix": "/p",
+      "content": [".available-content"],
+      "title": ".post-title",
+      "strip": [".subscription-widget-wrap", ".paywall-jump"],
+      "notes": "Substack ships hashed class names (title-X77sOw, subtitle-HEEcLo) alongside a few stable ones. The hashed names are exactly the case Readability's class and id heuristics cannot score, so pinning the stable pair is worth a rule. Publications on custom domains serve the same markup but need their own entry, since the host no longer ends in substack.com."
+    }
+  ]
+}

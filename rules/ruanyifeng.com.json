@@ -1,0 +1,14 @@
+{
+  "$schema": "../schema/rule.schema.json",
+  "site": "ruanyifeng.com",
+  "rules": [
+    {
+      "host": "*.ruanyifeng.com",
+      "pathPrefix": "/blog",
+      "content": ["#main-content"],
+      "title": "#page-title",
+      "byline": ".asset-meta .author",
+      "notes": "Movable Type markup. #main-content is the article body alone. Without this rule the generic rungs also pull in .asset-nav (previous post), #related_entries, and #comments, because the theme wraps all of them in the same #alpha column."
+    }
+  ]
+}
