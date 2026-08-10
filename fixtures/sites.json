@@ -1,0 +1,174 @@
+{
+  "description": "Corpus for auditing Reader View extraction. Each entry is a real page, categorised by the markup problem it represents rather than by topic, so a regression shows up as a category going soft rather than as one URL breaking. `expect` records what a healthy result looks like; `note` says why the page is in the list.",
+  "sites": [
+    {
+      "id": "wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Reading",
+      "category": "reference",
+      "expect": "article",
+      "note": "Semantic, stable markup with a long body. The easy case; if this regresses, something is badly wrong."
+    },
+    {
+      "id": "mdn",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Introduction",
+      "category": "docs",
+      "expect": "article",
+      "note": "Docs page with a sidebar table of contents competing with the body."
+    },
+    {
+      "id": "python-docs",
+      "url": "https://docs.python.org/3/tutorial/introduction.html",
+      "category": "docs",
+      "expect": "article",
+      "note": "Sphinx output. Heavy on code blocks, which some extractors drop."
+    },
+    {
+      "id": "kubernetes",
+      "url": "https://kubernetes.io/docs/concepts/overview/",
+      "category": "docs",
+      "expect": "article",
+      "note": "Hugo docs with two sidebars and a feedback widget inside the content column."
+    },
+    {
+      "id": "martinfowler",
+      "url": "https://martinfowler.com/articles/microservices.html",
+      "category": "blog",
+      "expect": "article",
+      "note": "Very long single-page essay with inline figures."
+    },
+    {
+      "id": "danluu",
+      "url": "https://danluu.com/everything-is-broken/",
+      "category": "blog",
+      "expect": "article",
+      "note": "Nearly unstyled HTML. Almost no class names for Readability to score."
+    },
+    {
+      "id": "simonwillison",
+      "url": "https://simonwillison.net/2026/Aug/10/openclaw/",
+      "category": "blog",
+      "expect": "article",
+      "note": "Short link-blog post. Tests that a legitimately short article is not mistaken for a truncated one."
+    },
+    {
+      "id": "overreacted",
+      "url": "https://overreacted.io/a-complete-guide-to-useeffect/",
+      "category": "blog",
+      "expect": "article",
+      "note": "Gatsby build with hashed class names and a very long body."
+    },
+    {
+      "id": "ruanyifeng",
+      "url": "https://www.ruanyifeng.com/blog/2026/08/weekly-issue-407.html",
+      "category": "blog",
+      "expect": "article",
+      "rule": "*.ruanyifeng.com",
+      "note": "Movable Type. Comments, related posts and prev/next all share the article's column, so the generic rungs over-capture. Has a site rule."
+    },
+    {
+      "id": "substack",
+      "url": "https://www.astralcodexten.com/p/your-book-review-two-arms-and-a-head",
+      "category": "newsletter",
+      "expect": "article",
+      "note": "Substack on a custom domain, so the *.substack.com rule does not apply. Hashed class names beside a few stable ones."
+    },
+    {
+      "id": "smashingmagazine",
+      "url": "https://www.smashingmagazine.com/2026/08/how-baseline-can-help-ship-less-javascript/",
+      "category": "magazine",
+      "expect": "article",
+      "note": "Long-form with inline ads, newsletter widgets and a comments link inside the body."
+    },
+    {
+      "id": "cloudflare-blog",
+      "url": "https://blog.cloudflare.com/workers-ai-gateway-unification/",
+      "category": "blog",
+      "expect": "article",
+      "note": "Engineering post, heavy on code blocks and tables."
+    },
+    {
+      "id": "github-blog",
+      "url": "https://github.blog/ai-and-ml/generative-ai/how-ai-code-generation-works/",
+      "category": "blog",
+      "expect": "article",
+      "note": "Marketing-shaped blog with related-post rails."
+    },
+    {
+      "id": "guardian",
+      "url": "https://www.theguardian.com/world/2026/aug/10/movie-paradise-how-malta-became-a-magnet-for-big-film-shoots",
+      "category": "news",
+      "expect": "article",
+      "note": "News with picture/source responsive images and a support-us appeal mid-article."
+    },
+    {
+      "id": "bbc",
+      "url": "https://www.bbc.com/news/articles/cvgjvgv926po",
+      "category": "news",
+      "expect": "article",
+      "note": "React-rendered news with lazy images and a related-topics rail."
+    },
+    {
+      "id": "arstechnica",
+      "url": "https://arstechnica.com/gadgets/2026/08/remembering-the-pre-google-web-when-search-was-an-experiment/",
+      "category": "news",
+      "expect": "article",
+      "note": "Multi-page-capable article with a heavy comment section."
+    },
+    {
+      "id": "theverge",
+      "url": "https://www.theverge.com/column/976690/ai-writing-detectors-suspicion",
+      "category": "news",
+      "expect": "article",
+      "note": "Next.js with utility-class CSS. The modern-markup case Readability scores worst on."
+    },
+    {
+      "id": "apnews",
+      "url": "https://apnews.com/article/stocks-markets-rates-iran-ai-adb7b918b15206e38d7899d482422308",
+      "category": "news",
+      "expect": "article",
+      "note": "Wire copy with an ad slot between every few paragraphs."
+    },
+    {
+      "id": "medium",
+      "url": "https://medium.com/@tobrien/the-grand-coulee-dam-is-eight-chapters-away-c783c922e83e",
+      "category": "platform",
+      "expect": "article",
+      "note": "Hashed class names throughout, plus a member-preview gate on some posts."
+    },
+    {
+      "id": "sspai",
+      "url": "https://sspai.com/post/113268",
+      "category": "platform",
+      "expect": "article",
+      "note": "Chinese SPA. Content mounts after load, so it exercises the readiness wait."
+    },
+    {
+      "id": "stackoverflow",
+      "url": "https://stackoverflow.com/questions/11227809/why-is-processing-a-sorted-array-faster-than-processing-an-unsorted-array",
+      "category": "qa",
+      "expect": "article",
+      "note": "Question plus many answers. There is no single article here, so whatever it returns is a judgement call worth watching."
+    },
+    {
+      "id": "hackernews",
+      "url": "https://news.ycombinator.com/item?id=1",
+      "category": "forum",
+      "expect": "reject",
+      "note": "A comment thread, not an article. Table-based layout with almost no prose. Should be refused rather than half-extracted."
+    },
+    {
+      "id": "lobsters",
+      "url": "https://lobste.rs/s/rsztog/who_should_pay_for_source_code",
+      "category": "forum",
+      "expect": "reject",
+      "note": "Link aggregator page whose body is a comment tree."
+    },
+    {
+      "id": "pdf-art-of-war",
+      "url": "https://sites.ualberta.ca/~enoch/Readings/The_Art_Of_War.pdf",
+      "category": "pdf",
+      "expect": "article",
+      "note": "66-page PDF. Only the accessibility path can read it, and it returns the first pages while the rest is captured."
+    }
+  ]
+}

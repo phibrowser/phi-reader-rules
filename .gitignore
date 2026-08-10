@@ -2,3 +2,6 @@
 # would mean every rule change carries a second, derived diff.
 dist/
 .DS_Store
+
+# Written by tools/audit.mjs.
+audit-results.json
