@@ -1,0 +1,13 @@
+{
+  "$schema": "../schema/rule.schema.json",
+  "site": "stackoverflow.com",
+  "rules": [
+    {
+      "host": "stackoverflow.com",
+      "pathPrefix": "/questions",
+      "content": ["#question .js-post-body", "#answers .js-post-body"],
+      "title": "#question-header h1",
+      "notes": "A question page is an article split across sibling containers, which is the case single-root selection cannot serve: the question body and each of the answers are separate posts. Without this rule the structural rung takes the whole page and scores 3.4x the page's visible text, because it sweeps in collapsed answers and screen-reader-only text along with the vote widgets, the sidebar and the comment forms."
+    }
+  ]
+}

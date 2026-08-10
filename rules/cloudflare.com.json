@@ -1,0 +1,12 @@
+{
+  "$schema": "../schema/rule.schema.json",
+  "site": "cloudflare.com",
+  "rules": [
+    {
+      "host": "blog.cloudflare.com",
+      "content": [".article-content"],
+      "title": "h1",
+      "notes": "The generic rungs take about half the post. The surrounding .post-content also holds the tag header, which reflows into a run of category names above the first paragraph."
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "../schema/rule.schema.json",
+  "site": "astralcodexten.com",
+  "rules": [
+    {
+      "host": "*.astralcodexten.com",
+      "pathPrefix": "/p",
+      "content": [".available-content"],
+      "title": ".post-title",
+      "strip": [".subscription-widget-wrap", ".paywall-jump"],
+      "notes": "Substack on a custom domain, so the *.substack.com rule cannot reach it even though the markup is identical. Readability declines here and the structural rung takes the whole page, newsletter signup and all: 379k characters of page against 53k of article."
+    }
+  ]
+}

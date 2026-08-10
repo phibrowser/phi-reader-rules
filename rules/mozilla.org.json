@@ -1,0 +1,12 @@
+{
+  "$schema": "../schema/rule.schema.json",
+  "site": "mozilla.org",
+  "rules": [
+    {
+      "host": "developer.mozilla.org",
+      "content": [".reference-layout__body"],
+      "title": "h1",
+      "notes": "The generic rungs take about half the article. The page's #content also holds the sticky In this article table of contents, which reads as duplicated headings once reflowed; the body element alone is the article."
+    }
+  ]
+}
