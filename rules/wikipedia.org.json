@@ -1,0 +1,24 @@
+{
+  "$schema": "../schema/rule.schema.json",
+  "site": "wikipedia.org",
+  "rules": [
+    {
+      "host": "*.wikipedia.org",
+      "pathPrefix": "/wiki",
+      "content": [".mw-body-content"],
+      "title": "h1",
+      "strip": [
+        ".mw-indicators",
+        ".mw-editsection",
+        ".navbox",
+        ".catlinks",
+        ".printfooter",
+        ".mw-jump-link",
+        ".shortdescription",
+        ".sistersitebox",
+        ".mw-authority-control"
+      ],
+      "notes": "Taken as one root so the infobox comes with the prose: it sits inside .mw-body-content and is the article's summary, not furniture. The generic rungs keep it too, but Readability strips class attributes, so the reader has no way to lay it out and it renders as a full-width block two thousand pixels tall before the first paragraph. A rule preserves the classes, and the reader styles .infobox as a card beside the text. The strips are the page chrome the generic rungs also pull in: the protection padlock in .mw-indicators, the bottom navigation boxes, and the category links."
+    }
+  ]
+}
