@@ -6,7 +6,8 @@
       "host": "developer.mozilla.org",
       "content": [".reference-layout__body"],
       "title": "h1",
-      "notes": "The generic rungs take about half the article. The page's #content also holds the sticky In this article table of contents, which reads as duplicated headings once reflowed; the body element alone is the article."
+      "strip": [".example-header", "mdn-copy-button", ".code-example .icon"],
+      "notes": "The generic rungs take about half the article. The page's #content also holds the sticky In this article table of contents, which reads as duplicated headings once reflowed; the body element alone is the article. Code samples live in the shadow root of an <mdn-code-example>, and once that shadow content is inlined the sample's toolbar comes with it — the language badge and the copy button reflow into a stray \"JS Copy\" line above every block."
     }
   ]
 }
