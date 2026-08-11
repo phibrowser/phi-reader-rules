@@ -40,6 +40,11 @@
           "minLength": 1,
           "pattern": "^/"
         },
+        "pathContains": {
+          "type": "string",
+          "description": "Restricts the rule to paths containing this substring. A prefix cannot express the shape a thread URL usually has, where the identifying part sits in the middle: /r/programming/comments/..., /naval/status/.... Without it a thread rule also fires on the subreddit listing and the home timeline, which are feeds. A rule with pathContains outranks one without.",
+          "minLength": 1
+        },
         "content": {
           "type": "array",
           "description": "Selectors for the article body. Every match of every selector is concatenated in document order, which is what makes articles split across sibling containers come out whole.",
@@ -65,6 +70,33 @@
           "type": "string",
           "description": "Selector for the author line.",
           "minLength": 1
+        },
+        "thread": {
+          "type": "object",
+          "description": "Present when the page is a thread rather than an article: a question and its answers, or a post and its comments. Each node `content` selects becomes its own post with a byline, instead of everything being concatenated into one run-on page. Every field below is either a selector run inside the post, or @name to read an attribute off the post element itself.",
+          "additionalProperties": false,
+          "properties": {
+            "body": {
+              "type": "string",
+              "description": "The post's text. Omit only when the container holds nothing but the body; otherwise the vote widgets and reply forms come too. A selector that matches nothing drops the post, so a stale selector makes the rule decline rather than producing junk.",
+              "minLength": 1
+            },
+            "author": {
+              "type": "string",
+              "description": "Who wrote the post. Selector, or @name for an attribute (Reddit puts the author on the shreddit-comment element).",
+              "minLength": 1
+            },
+            "meta": {
+              "type": "string",
+              "description": "Score, timestamp, or whatever else belongs beside the author. Selector or @name.",
+              "minLength": 1
+            },
+            "depth": {
+              "type": "string",
+              "description": "Nesting depth of a comment tree, indented in the reader up to a fixed maximum. Selector or @name.",
+              "minLength": 1
+            }
+          }
         },
         "forceRung": {
           "type": "string",

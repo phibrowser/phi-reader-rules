@@ -155,7 +155,28 @@
       "url": "https://stackoverflow.com/questions/11227809/why-is-processing-a-sorted-array-faster-than-processing-an-unsorted-array",
       "category": "qa",
       "expect": "article",
-      "note": "Question plus many answers. There is no single article here, so whatever it returns is a judgement call worth watching."
+      "note": "Question plus many answers — the case the thread rule exists for. Each post must come out as its own card with its author and score; the author is the LAST post-signature, since the first is the editor."
+    },
+    {
+      "id": "reddit",
+      "url": "https://www.reddit.com/r/programming/comments/1tlh5aj/announcement_weve_updated_the_rules_and_april_is/",
+      "category": "qa",
+      "expect": "article",
+      "note": "A comment tree, nested. Exercises the parts nothing else does: author, score and depth read from attributes rather than selectors, indentation from depth, and the fact that a parent comment contains its replies — so a body has to be attributed to the innermost post that holds it or the top comment repeats the whole subtree."
+    },
+    {
+      "id": "x-status",
+      "url": "https://x.com/naval/status/1002103360646823936",
+      "category": "qa",
+      "expect": "article",
+      "note": "Every class is hashed, so the rule hangs on data-testid. The timeline is virtualised: only the rendered tweets can be extracted, so a partial thread is the expected result, not a bug."
+    },
+    {
+      "id": "quora",
+      "url": "https://www.quora.com/What-is-the-most-efficient-way-to-learn-programming",
+      "category": "qa",
+      "expect": "article",
+      "note": "Answers are truncated until a (more) control is clicked, so this is the one site where the rule's expand list carries most of the value — 11196 characters without it, 25557 with. The post container is selected with :has(), because the author link is a sibling of the body. Sponsored answers look exactly like real ones and come through attributed to the advertiser."
     },
     {
       "id": "hackernews",

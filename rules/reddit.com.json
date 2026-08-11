@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/rule.schema.json",
+  "site": "reddit.com",
+  "rules": [
+    {
+      "host": "*.reddit.com",
+      "pathContains": "/comments/",
+      "content": [
+        "shreddit-post",
+        "shreddit-comment"
+      ],
+      "thread": {
+        "body": "[slot=\"text-body\"], [slot=\"comment\"]",
+        "author": "@author",
+        "meta": "@score",
+        "depth": "@depth"
+      },
+      "title": "shreddit-post h1",
+      "notes": "Reddit's own web components are the most stable selectors on the page — everything else is hashed utility classes. Author, score and nesting depth are attributes on shreddit-comment, with no element inside carrying them, which is why the thread fields accept @name. Comments arrive inside <details>, which preparation already opens; without that they would be measured as hidden and dropped. A link post has no text body and so contributes no card, which is correct — its title is the article."
+    }
+  ]
+}

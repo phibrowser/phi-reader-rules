@@ -64,13 +64,59 @@ rules.
 | --- | --- | --- |
 | `host` | yes | Exact host, `*.suffix` (which also matches the bare host), or `*contains*`. Exact beats suffix beats contains. |
 | `pathPrefix` | no | Restricts the rule to a subtree. Matched on a `/` boundary, so `/blog` does not match `/blogroll`. A longer prefix wins over a shorter one. |
+| `pathContains` | no | Restricts the rule to paths containing a substring. Use when the identifying segment sits in the middle — `/comments/`, `/status/` — which no prefix can express. A rule with it outranks one without. |
 | `content` | yes | Selectors for the article body. Every match of every selector is concatenated in document order. |
 | `strip` | no | Selectors removed from the extracted content. |
 | `expand` | no | Selectors clicked before extraction, for read-more controls that hide part of the article. |
 | `title` | no | Selector for the title. Falls back to `document.title`. |
 | `byline` | no | Selector for the author line. |
+| `thread` | no | Marks the page as a thread rather than an article; see below. |
 | `forceRung` | no | Pins extraction to `rule`, `readability`, or `structural`. Rarely correct. |
 | `notes` | no | Free text for reviewers. Not shipped to the browser. |
+
+### Threads
+
+A question-and-answer page or a comment thread is not one article, it is many
+short ones by different people. Concatenating them the way `content` normally
+does produces a wall of text in which there is no way to tell where one answer
+ends or who wrote it — most of what a reader wants from a thread.
+
+Adding `thread` changes that: each node `content` selects becomes its own post
+with a byline, and the reader renders them as separated, optionally indented
+cards.
+
+```json
+{
+  "host": "*.reddit.com",
+  "pathContains": "/comments/",
+  "content": ["shreddit-post", "shreddit-comment"],
+  "thread": {
+    "body": "[slot=\"text-body\"], [slot=\"comment\"]",
+    "author": "@author",
+    "meta": "@score",
+    "depth": "@depth"
+  }
+}
+```
+
+| Field | Meaning |
+| --- | --- |
+| `body` | The post's text. Omit only when the container holds nothing else, or the vote widgets come too. |
+| `author` | Who wrote it. |
+| `meta` | Score, timestamp, whatever belongs beside the author. |
+| `depth` | Nesting depth of a comment tree. Indented up to a fixed maximum. |
+
+Each is either a selector run inside the post, or `@name` to read an attribute
+off the post element. The attribute form is not a convenience: Reddit hangs a
+comment's author, score and depth on the `shreddit-comment` element, with
+nothing inside carrying them.
+
+Two things to know when writing one. A `body` selector that matches nothing
+drops the post, so a stale selector makes the whole rule decline and the
+generic ladder takes over, rather than the reader showing a column of vote
+widgets. And scope the rule with `pathContains`: without it a thread rule also
+fires on the subreddit listing or the home timeline, which are feeds, and the
+reader presents unrelated posts as one conversation.
 
 [`schema/rule.schema.json`](schema/rule.schema.json) is authoritative and is
 enforced in CI.

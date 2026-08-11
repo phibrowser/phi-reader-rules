@@ -1,0 +1,18 @@
+{
+  "$schema": "../schema/rule.schema.json",
+  "site": "x.com",
+  "rules": [
+    {
+      "host": "x.com",
+      "pathContains": "/status/",
+      "content": [
+        "article[data-testid=\"tweet\"]"
+      ],
+      "thread": {
+        "body": "[data-testid=\"tweetText\"]",
+        "author": "[data-testid=\"User-Name\"]"
+      },
+      "notes": "Every class on x.com is hashed, so data-testid is the only stable hook; those three have been stable for years because the site's own tests depend on them. No meta selector: User-Name already ends with the date, and adding time printed it twice. The timeline is virtualised, so extraction sees only the tweets currently rendered — a long reply chain will be partial, and no rule can fix that from inside the page."
+    }
+  ]
+}

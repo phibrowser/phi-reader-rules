@@ -5,9 +5,14 @@
     {
       "host": "stackoverflow.com",
       "pathPrefix": "/questions",
-      "content": ["#question .js-post-body", "#answers .js-post-body"],
+      "content": ["#question", "#answers .answer"],
+      "thread": {
+        "body": ".js-post-body",
+        "author": ".post-signature:last-of-type .user-details a",
+        "meta": ".js-vote-count"
+      },
       "title": "#question-header h1",
-      "notes": "A question page is an article split across sibling containers, which is the case single-root selection cannot serve: the question body and each of the answers are separate posts. Without this rule the structural rung takes the whole page and scores 3.4x the page's visible text, because it sweeps in collapsed answers and screen-reader-only text along with the vote widgets, the sidebar and the comment forms."
+      "notes": "A question page is not an article: it is a question and up to hundreds of answers by different people. Concatenating the bodies, which this rule used to do, produced a wall of text with no way to tell where one answer ended or who wrote it. The author selector takes the LAST post-signature deliberately — the first is the editor, so without :last-of-type a heavily edited answer is attributed to whoever last touched it."
     }
   ]
 }

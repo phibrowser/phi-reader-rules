@@ -1,0 +1,17 @@
+{
+  "$schema": "../schema/rule.schema.json",
+  "site": "quora.com",
+  "rules": [
+    {
+      "host": "*.quora.com",
+      "content": ["div.q-box:has(> .puppeteer_test_answer_content)"],
+      "thread": {
+        "body": ".puppeteer_test_answer_content",
+        "author": "a[href*=\"/profile/\"]"
+      },
+      "expand": [".qt_read_more"],
+      "title": "h1",
+      "notes": "Quora's own class names are hashed, but the hooks its browser tests use are not, and puppeteer_test_answer_content is the answer body. The post container is selected with :has() because the author link is a sibling of the body, not inside it, and the parent div carries nothing but a generic q-box class shared by 1300 elements on the page. Expanding qt_read_more matters more here than anywhere else: every long answer is truncated, and clicking them took this page from 11196 to 25557 characters. Deliberately not scoped by path — a Quora question lives at the site root with nothing in the URL to match on — so the rule also fires on the feed, where it renders the feed's answers as cards. Sponsored answers are styled exactly like real ones and come through as posts by their advertiser."
+    }
+  ]
+}
