@@ -16,6 +16,14 @@
       "note": "Docs page with a sidebar table of contents competing with the body."
     },
     {
+      "id": "mdn-shadow-code",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API",
+      "category": "docs",
+      "expect": "article",
+      "rule": "developer.mozilla.org",
+      "note": "Every code sample is an <mdn-code-example> custom element whose light DOM is empty and whose content lives in an open shadow root. cloneNode does not copy a shadow root, so clone-based extraction drops all twelve samples and reports success. Pins that shadow content is inlined."
+    },
+    {
       "id": "python-docs",
       "url": "https://docs.python.org/3/tutorial/introduction.html",
       "category": "docs",
