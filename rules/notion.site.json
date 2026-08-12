@@ -1,0 +1,12 @@
+{
+  "$schema": "../schema/rule.schema.json",
+  "site": "notion.site",
+  "rules": [
+    {
+      "host": "*.notion.site",
+      "content": [".notion-page-content"],
+      "title": "h1",
+      "notes": "A page published from Notion, served by the same front end as app.notion.com and so built from the same component classes. Deliberately no pathContains: a published page lives at the host root as /Page-Title-<id>, with none of the /p/ segment the app uses, and on one of these hosts every page is a Notion page anyway. Not verified against a live published site — no reachable example was found when this was written, and the wildcard hosts help.notion.site and templates.notion.site answer 200 with an empty 190-character placeholder. If the published renderer ever differs, .notion-page-content simply fails to match, the rule declines, and the generic ladder handles the page exactly as it did before this rule existed."
+    }
+  ]
+}
