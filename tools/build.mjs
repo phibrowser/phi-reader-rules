@@ -59,6 +59,10 @@ for (const filename of readdirSync(rulesDir).sort()) {
   for (const [index, rule] of file.rules.entries()) {
     const where = `rules/${filename}: rules[${index}]`;
 
+    if (!rule.content?.length && !rule.source) {
+      problems.push(`${where}: needs content selectors, or a source to take the article from`);
+    }
+
     if (!hostBelongsToSite(rule.host, file.site)) {
       problems.push(`${where}: host "${rule.host}" does not belong in a file for ${file.site}`);
     }
@@ -159,7 +163,12 @@ function canonicalize(rule) {
   const out = { host: rule.host };
   if (rule.pathPrefix) out.pathPrefix = rule.pathPrefix;
   if (rule.pathContains) out.pathContains = rule.pathContains;
-  out.content = rule.content;
+  // Always emitted, even empty. A source-driven rule selects nothing, but
+  // every browser already in the field decodes `content` as a required array,
+  // and a missing key fails the whole table rather than the one rule — which
+  // would silently strip every site's rules on an older build.
+  out.content = rule.content ?? [];
+  if (rule.source) out.source = rule.source;
   if (rule.strip?.length) out.strip = rule.strip;
   if (rule.expand?.length) out.expand = rule.expand;
   if (rule.title) out.title = rule.title;

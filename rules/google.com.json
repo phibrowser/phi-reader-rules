@@ -1,0 +1,12 @@
+{
+  "$schema": "../schema/rule.schema.json",
+  "site": "google.com",
+  "rules": [
+    {
+      "host": "docs.google.com",
+      "pathContains": "/document/d/",
+      "source": "googleDocsExport",
+      "notes": "The Docs editor paints the document into a canvas: the page carries two canvas elements, no kix-page or kix-lineview nodes, no SVG text, and 420 characters of body text that are entirely the menu bar. There is nothing in the DOM to select, so no amount of content selectors can work and every rung of the ladder correctly finds nothing. This rule instead points the browser at the export endpoint the Docs UI itself uses, which returns the whole document as clean HTML. Scoped by pathContains rather than pathPrefix because /document/d/e/.../pub is a document published to the web, which is already plain HTML the ordinary ladder reads well — the browser skips that form."
+    }
+  ]
+}

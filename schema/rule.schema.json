@@ -26,7 +26,7 @@
     "rule": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["host", "content"],
+      "required": ["host"],
       "properties": {
         "host": {
           "type": "string",
@@ -47,7 +47,7 @@
         },
         "content": {
           "type": "array",
-          "description": "Selectors for the article body. Every match of every selector is concatenated in document order, which is what makes articles split across sibling containers come out whole.",
+          "description": "Selectors for the article body. Every match of every selector is concatenated in document order, which is what makes articles split across sibling containers come out whole. Required unless the rule sets `source`, which takes its content from somewhere other than the page.",
           "minItems": 1,
           "items": { "type": "string", "minLength": 1 }
         },
@@ -97,6 +97,11 @@
               "minLength": 1
             }
           }
+        },
+        "source": {
+          "type": "string",
+          "description": "Takes the article from somewhere other than the page's own markup, for a document the browser cannot read by selecting elements. Only the values listed here exist: the capability is implemented in the browser and a rule only chooses which sites use it, so a rule can never name a URL of its own to fetch. `googleDocsExport` asks a Google Doc for itself through the export endpoint the Docs UI uses, because the editor paints its text into a canvas and leaves nothing in the DOM to select.",
+          "enum": ["googleDocsExport"]
         },
         "forceRung": {
           "type": "string",
