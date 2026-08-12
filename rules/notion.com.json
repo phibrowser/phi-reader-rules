@@ -1,0 +1,13 @@
+{
+  "$schema": "../schema/rule.schema.json",
+  "site": "notion.com",
+  "rules": [
+    {
+      "host": "app.notion.com",
+      "pathContains": "/p/",
+      "content": [".notion-page-content"],
+      "title": "h1",
+      "notes": "Without this the generic ladder opens the article with Notion's own invitation to comment — 'Anyone with a Notion account can comment on this page. Sign up or login to comment' — because the prompt sits inside the scored container, and it takes the tab title rather than the page's heading. The content root is Notion's own component class, which is the only stable name on a page whose other classes are generated. Code blocks are handled in the extractor rather than here: Notion writes them as plain divs with no pre or code element anywhere on the page."
+    }
+  ]
+}
