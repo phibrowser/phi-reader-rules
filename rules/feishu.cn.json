@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/rule.schema.json",
+  "site": "feishu.cn",
+  "rules": [
+    {
+      "host": "*.feishu.cn",
+      "pathPrefix": "/wiki",
+      "content": [".page-block-children"],
+      "title": ".page-block-header h1",
+      "strip": [".docx-back_ref_list-block"],
+      "notes": "Feishu scatters a document across per-line elements, and Readability answers by keeping whichever single block scores highest: on a build guide of two paragraphs and two code listings it returned one code listing, 782 characters of the 1823 on the page, and dropped the prose that explains it. The rule takes the document body instead, which is the whole thing at 1311. Title is read from the page heading rather than document.title because Feishu prefixes the tab title with a watermark of about forty invisible characters — zero-width spaces and word joiners, unique per reader — which arrive verbatim as the article title. Naming the title also stops Readability inventing a byline: with nothing that looks like an author on the page it took the opening sentence of the guide."
+    },
+    {
+      "host": "*.feishu.cn",
+      "pathPrefix": "/docx",
+      "content": [".page-block-children"],
+      "title": ".page-block-header h1",
+      "strip": [".docx-back_ref_list-block"],
+      "notes": "A wiki page and a standalone doc are the same editor under two paths. Kept as two rules rather than dropping the path restriction: /base, /sheets and /mindnotes are on the same hosts and are not documents, and the generic ladder declining them is the right answer."
+    }
+  ]
+}
