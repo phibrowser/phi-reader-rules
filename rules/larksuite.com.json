@@ -1,0 +1,22 @@
+{
+  "$schema": "../schema/rule.schema.json",
+  "site": "larksuite.com",
+  "rules": [
+    {
+      "host": "*.larksuite.com",
+      "pathPrefix": "/wiki",
+      "content": [".page-block-children"],
+      "title": ".page-block-header h1",
+      "strip": [".docx-back_ref_list-block"],
+      "notes": "Lark is Feishu for the rest of the world and the same editor underneath, down to the class names, so this mirrors feishu.cn.json. Checked against a tenant on jp.larksuite.com: the same .page-block-children body, the same .page-block-header h1, and the same watermark of invisible characters prefixed to document.title. The host is a suffix wildcard because a tenant sits under a region — qjpo13vakonb.jp.larksuite.com — so there are two labels below the domain, not one."
+    },
+    {
+      "host": "*.larksuite.com",
+      "pathPrefix": "/docx",
+      "content": [".page-block-children"],
+      "title": ".page-block-header h1",
+      "strip": [".docx-back_ref_list-block"],
+      "notes": "A wiki page and a standalone doc are the same editor under two paths, as on Feishu. The path restriction stays so /base, /sheets and /mindnotes keep declining."
+    }
+  ]
+}
