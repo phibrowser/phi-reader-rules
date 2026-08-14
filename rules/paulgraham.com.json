@@ -5,7 +5,8 @@
     {
       "host": "*.paulgraham.com",
       "content": ["td[width=\"435\"]"],
-      "notes": "A 1997 table layout with no classes or ids anywhere, so Readability has nothing to score and settles on the outer table, which brings the navigation strip (bel-7.gif, an image map) and the PAUL GRAHAM banner into the article above the text. The essay always sits alone in td[width=\"435\"] and the navigation is a sibling cell of its ancestor, so naming the cell drops both. A few essays match two or three times; the extras are the one-line \"Russian Translation\" cells that follow the essay, and they come out at the end where they belong."
+      "strip": ["td[width=\"435\"] > img[alt]"],
+      "notes": "A 1997 table layout with no classes or ids anywhere, so Readability has nothing to score and settles on the outer table, which brings the navigation strip (bel-7.gif, an image map) and the PAUL GRAHAM banner into the article above the text. The essay always sits alone in td[width=\"435\"] and the navigation is a sibling cell of its ancestor, so naming the cell drops both. A few essays match two or three times; the extras are the one-line \"Russian Translation\" cells that follow the essay, and they come out at the end where they belong. The strip drops the title, which every essay renders as a small-caps gif the reader has already shown as its own heading. The gif is not reliably the cell's first child — the essays carrying the Y Combinator banner open with a link instead — but it is the only image in the cell with an alt, and across 80 essays that alt is always the title. Bullets, spacers and the banner carry none, so they stay."
     }
   ]
 }
