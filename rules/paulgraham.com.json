@@ -1,0 +1,11 @@
+{
+  "$schema": "../schema/rule.schema.json",
+  "site": "paulgraham.com",
+  "rules": [
+    {
+      "host": "*.paulgraham.com",
+      "content": ["td[width=\"435\"]"],
+      "notes": "A 1997 table layout with no classes or ids anywhere, so Readability has nothing to score and settles on the outer table, which brings the navigation strip (bel-7.gif, an image map) and the PAUL GRAHAM banner into the article above the text. The essay always sits alone in td[width=\"435\"] and the navigation is a sibling cell of its ancestor, so naming the cell drops both. A few essays match two or three times; the extras are the one-line \"Russian Translation\" cells that follow the essay, and they come out at the end where they belong."
+    }
+  ]
+}
